@@ -1,11 +1,12 @@
 import express from 'express'
 
 import userController from '../controllers/user.controller.js'
+import { verifyAccessToken } from '../middlewares/auth.middleware.js'
 
 const userRouter = express.Router()
 
-// get all users
-userRouter.get('/', userController.getAllUsers)
+// get all users, require auth
+userRouter.get('/', verifyAccessToken, userController.getAllUsers)
 
 // register
 userRouter.post('/register', userController.register)
