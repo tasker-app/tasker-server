@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 import { JWT_SECRET } from '../configs/config.js'
-import { badRequest } from '../utils/response.util.js'
+import { badRequest, unauthorized } from '../utils/response.util.js'
 
 const verifyAccessToken = async (req, res, next) => {
   if (!req.headers.authorization) return badRequest(res, 'Token is required')
@@ -13,7 +13,7 @@ const verifyAccessToken = async (req, res, next) => {
   try {
     jwt.verify(token, JWT_SECRET)
   } catch (error) {
-    return badRequest(res, 'Token is invalid')
+    return unauthorized(res, 'Token is invalid')
   }
 
   next()
