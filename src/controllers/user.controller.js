@@ -38,7 +38,7 @@ const login = async (req, res) => {
 
       if (!isPasswordMatch) return badRequest(res, 'Email or password is incorrect')
 
-      const { accessToken, refreshToken } = generateToken(user.email, user.username)
+      const { accessToken, refreshToken } = generateToken(user.email, user.username, user._id)
 
       // update refresh token to database
       await User.findOneAndUpdate(

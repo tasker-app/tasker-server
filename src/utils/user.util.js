@@ -39,11 +39,6 @@ const createUser = async (email, password, username) => {
   }
 }
 
-// module.exports = {
-//   createUser,
-//   getUserByEmail,
-// }
-
 export default {
   createUser,
   getUserByEmail

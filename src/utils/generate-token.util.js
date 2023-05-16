@@ -2,11 +2,12 @@ import jwt from 'jsonwebtoken'
 
 import { JWT_SECRET } from '../configs/config.js'
 
-const generateToken = (email, username) => {
+const generateToken = (email, username, id) => {
   try {
     const payload = {
       email,
-      username
+      username,
+      id
     }
 
     const accessToken = jwt.sign(payload, JWT_SECRET, {
