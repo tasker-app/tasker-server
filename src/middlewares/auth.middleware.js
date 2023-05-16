@@ -11,7 +11,8 @@ const verifyAccessToken = async (req, res, next) => {
   if (!token) return badRequest(res, 'Token is required')
 
   try {
-    jwt.verify(token, JWT_SECRET)
+    const decodedToken = jwt.verify(token, JWT_SECRET)
+    req.userId = decodedToken.id
   } catch (error) {
     return unauthorized(res, 'Token is invalid')
   }
