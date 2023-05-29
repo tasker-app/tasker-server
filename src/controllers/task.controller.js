@@ -108,7 +108,7 @@ const searchByName = async (req, res) => {
 
     const tasks = await Task.find({ userId, name: { $regex: name, $options: 'i' } })
 
-    if (!tasks) return badRequest(res, 'Task not found')
+    if (!tasks || tasks.length === 0) return badRequest(res, 'Tasks not found')
 
     return success(res, tasks)
   } catch (error) {
