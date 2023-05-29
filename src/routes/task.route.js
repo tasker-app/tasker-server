@@ -21,4 +21,7 @@ taskRouter.put('/:id', verifyAccessToken, taskController.updateTask)
 // delete task
 taskRouter.delete('/:id', verifyAccessToken, taskController.deleteTask)
 
+// search task by name
+taskRouter.get('/search/:name', verifyAccessToken, taskController.searchByName)
+
 export default taskRouter

@@ -96,4 +96,24 @@ const deleteTask = async (req, res) => {
   }
 }
 
-export default { createTask, getAllTasks, getTaskById, updateTask, deleteTask }
+const searchByName = async (req, res) => {
+  try {
+    const { userId } = req
+
+    if (!userId) return unauthorized(res, 'User ID is required')
+
+    const { name } = req.params
+
+    if (!name) return badRequest(res, 'Task name is required')
+
+    const tasks = await Task.find({ userId, name: { $regex: name, $options: 'i' } })
+
+    if (!tasks) return badRequest(res, 'Task not found')
+
+    return success(res, tasks)
+  } catch (error) {
+    return internalServerError(res, `Cannot search task by name: ${error}`)
+  }
+}
+
+export default { createTask, getAllTasks, getTaskById, updateTask, deleteTask, searchByName }
