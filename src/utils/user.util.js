@@ -5,11 +5,7 @@ import User from '../models/user.model.js'
 
 const getUserByEmail = async (email) => {
   try {
-    const user = await User.findOne({
-      where: {
-        email
-      }
-    })
+    const user = await User.findOne({ email })
 
     return user
   } catch (error) {

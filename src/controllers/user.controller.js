@@ -87,7 +87,7 @@ const getRetrieveToken = async (req, res) => {
   const refreshToken = req.headers['x-refresh-token']
 
   try {
-    const decodedRefreshToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+    const decodedRefreshToken = jwt.verify(refreshToken, process.env.JWT_SECRET)
     const { email, username } = decodedRefreshToken
 
     try {
